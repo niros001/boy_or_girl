@@ -1,7 +1,7 @@
 {
   "name": "boy-or-girl",
   "version": "0.1.0",
-  "homepage": "https://niros.github.io/boy_or_girl",
+  "homepage": "https://niros001.github.io/boy_or_girl",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
