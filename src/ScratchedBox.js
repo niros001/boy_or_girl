@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBabyCarriage} from '@fortawesome/free-solid-svg-icons';
 
-const SCRATCH_SIZE = 5;
+const SCRATCH_SIZE = 10;
 
 const Container = styled.div`
   position: relative;
@@ -14,7 +14,6 @@ const Container = styled.div`
   width: 100px;
   height: 100px;
   margin: 5px;
-  touch-action: none;
 `
 
 const HiddenDot = styled.div`
@@ -36,11 +35,19 @@ const ScratchedBox = ({data}) => (
       {[...Array(100 / SCRATCH_SIZE).keys()].map((i) =>
           [...Array(100 / SCRATCH_SIZE).keys()].map((j) => (
               <HiddenDot
+                  name="dot"
                   key={`${i}-${j}`}
                   top={(i * SCRATCH_SIZE)}
                   left={j * SCRATCH_SIZE}
                   onMouseMove={({target}) => target.style.background = 'transparent'}
-                  onTouchMove={({target}) => target.style.background = 'transparent'}
+                  onTouchMove={(e) => {
+                    const clientX = e.touches[0].clientX;
+                    const clientY = e.touches[0].clientY;
+                    const hoverElement = document.elementFromPoint(clientX, clientY);
+                    if (hoverElement.getAttribute('name') === 'dot') {
+                      hoverElement.style.background = 'transparent'
+                    }
+                  }}
               />
           )))}
     </Container>

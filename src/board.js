@@ -28,7 +28,7 @@ export const generateBoard = () => {
     console.log(board)
     return board;
   } else {
-    console.log('Not valid board')
+    // console.log('Not valid board')
     return generateBoard();
   }
 }
