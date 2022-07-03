@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import {useMemo} from 'react';
+import ScratchedBox from './ScratchedBox';
+import {generateBoard} from './board';
 
-function App() {
+const App = () => {
+  const board = useMemo(() => generateBoard(), []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="card-wrapper">
+        <h2>Boy or Girl?</h2>
+        <div className="card">
+          {[...Array(3).keys()].map((i) => <div key={i} className="row">
+            {[...Array(3).keys()].map((j) => (
+                <ScratchedBox key={j} data={board[(i * 3) + j]} />
+            ))}
+          </div>)}
+        </div>
+        <h4>Some rules...</h4>
+        <h4>Some rules...</h4>
+      </div>
     </div>
   );
 }
