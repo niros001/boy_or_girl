@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBabyCarriage} from '@fortawesome/free-solid-svg-icons';
 
-const SCRATCH_SIZE = 10;
+const BOX_SIZE = 90;
+const SCRATCH_SIZE = 15;
 
 const Container = styled.div`
   position: relative;
@@ -11,8 +12,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  width: 100px;
-  height: 100px;
+  width: ${BOX_SIZE}px;
+  height: ${BOX_SIZE}px;
   margin: 5px;
 `
 
@@ -32,8 +33,8 @@ const ScratchedBox = ({data}) => (
           color={(data === 'X') ? '#4978F4' : '#F247A0'}
           fontSize={50}
       />
-      {[...Array(100 / SCRATCH_SIZE).keys()].map((i) =>
-          [...Array(100 / SCRATCH_SIZE).keys()].map((j) => (
+      {[...Array(BOX_SIZE / SCRATCH_SIZE).keys()].map((i) =>
+          [...Array(BOX_SIZE / SCRATCH_SIZE).keys()].map((j) => (
               <HiddenDot
                   name="dot"
                   key={`${i}-${j}`}

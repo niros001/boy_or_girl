@@ -28,16 +28,6 @@
   font-family: Trattatello, fantasy;
 }
 
-.card-wrapper h2 {
-  color: #282c34;
-}
-
-.card-wrapper h4 {
-  color: #282c34;
-  margin: 5px 0;
-  align-items: flex-start !important;
-}
-
 .card {
   display: flex;
   flex-direction: column;
