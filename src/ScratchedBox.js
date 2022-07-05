@@ -39,7 +39,7 @@ const ScratchedBox = ({data}) => {
     elements.push(document.elementFromPoint(x, y + SCRATCH_SIZE));
     elements.push(document.elementFromPoint(x + SCRATCH_SIZE, y));
     elements.forEach((element) => {
-      if (element.getAttribute('name') === 'dot') {
+      if (element && (element.getAttribute('name') === 'dot')) {
         element.style.background = 'transparent'
       }
     })
