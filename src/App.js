@@ -4,7 +4,7 @@ import ScratchedBox from './ScratchedBox';
 import {generateBoard} from './board';
 import {faBabyCarriage} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {SCRATCH_SIZE} from './constants';
+import {SCRATCH_SIZE, WINNER_COLOR, LOOSER_COLOR} from './constants';
 
 const Container = styled.div`
   background-repeat: repeat;
@@ -52,7 +52,7 @@ const Subtitle = styled(Title)`
 `
 
 const App = () => {
-  const board = useMemo(() => generateBoard(), []);
+  const {board, winner} = useMemo(() => generateBoard(), []);
 
   const onScratch = useCallback(({touches, clientX, clientY}) => {
     const x = touches ? touches[0].clientX : clientX;
@@ -80,7 +80,7 @@ const App = () => {
         >
           {[...Array(3).keys()].map((i) => <Row key={i}>
             {[...Array(3).keys()].map((j) => (
-                <ScratchedBox key={j} data={board[(i * 3) + j]} />
+                <ScratchedBox key={j} color={board[(i * 3) + j] === winner ? WINNER_COLOR : LOOSER_COLOR} winner={winner} />
             ))}
           </Row>)}
         </Card>

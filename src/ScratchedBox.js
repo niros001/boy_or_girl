@@ -24,11 +24,11 @@ const HiddenDot = styled.div`
   background: ${({isQuestionMark}) => (isQuestionMark ? 'gold' : 'radial-gradient(circle, rgba(73,120,244,1) 0%, rgba(242,71,160,1) 100%)')};
 `
 
-const ScratchedBox = ({data}) => (
+const ScratchedBox = ({color}) => (
     <Container>
       <FontAwesomeIcon
           icon={faBabyCarriage}
-          color={(data === 'X') ? '#4978F4' : '#F247A0'}
+          color={color}
           fontSize={50}
       />
       {[...Array(SCRATCH_COUNT).keys()].map((i) =>

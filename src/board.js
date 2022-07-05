@@ -22,11 +22,12 @@ export const generateBoard = () => {
   const board = [];
   const possibleMoves = [...moves];
   while(possibleMoves.length) {
-    board.push(...possibleMoves.splice((Math.random() * possibleMoves.length), 1))
+    board.push(...possibleMoves.splice((Math.floor(Math.random() * possibleMoves.length)), 1))
   }
-  if (getWinners(board).length === 1) {
-    console.log(board)
-    return board;
+  const winners = getWinners(board);
+  if (winners.length === 1) {
+    console.log(board, winners[0])
+    return {board, winner: winners[0]};
   } else {
     // console.log('Not valid board')
     return generateBoard();
