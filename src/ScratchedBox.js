@@ -46,10 +46,17 @@ const ScratchedBox = ({data}) => (
                   onTouchMove={(e) => {
                     const clientX = e.touches[0].clientX;
                     const clientY = e.touches[0].clientY;
-                    const hoverElement = document.elementFromPoint(clientX, clientY);
-                    if (hoverElement.getAttribute('name') === 'dot') {
-                      hoverElement.style.background = 'transparent'
-                    }
+                    const elements = [];
+                    elements.push(document.elementFromPoint(clientX - SCRATCH_SIZE, clientY));
+                    elements.push(document.elementFromPoint(clientX, clientY - SCRATCH_SIZE));
+                    elements.push(document.elementFromPoint(clientX, clientY));
+                    elements.push(document.elementFromPoint(clientX, clientY + SCRATCH_SIZE));
+                    elements.push(document.elementFromPoint(clientX + SCRATCH_SIZE, clientY));
+                    elements.forEach((element) => {
+                      if (element.getAttribute('name') === 'dot') {
+                        element.style.background = 'transparent'
+                      }
+                    })
                   }}
               />
           )))}
