@@ -12,7 +12,7 @@ const Container = styled.div`
   background-color: white;
   width: ${BOX_SIZE}px;
   height: ${BOX_SIZE}px;
-  margin: 5px;
+  margin: 4px;
 `
 
 const HiddenDot = styled.div`

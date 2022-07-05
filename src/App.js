@@ -34,6 +34,7 @@ const Card = styled.div`
   align-items: center;
   background-color: black;
   touch-action: none;
+  padding: 2px;
 `
 
 const Row = styled.div`
