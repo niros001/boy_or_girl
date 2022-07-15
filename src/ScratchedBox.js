@@ -21,7 +21,8 @@ const HiddenDot = styled.div`
   height: ${SCRATCH_SIZE}px;
   top: ${({top}) => top}px;
   left: ${({left}) => left}px;
-  background: ${({isQuestionMark}) => (isQuestionMark ? 'gold' : 'radial-gradient(circle, rgba(73,120,244,1) 0%, rgba(242,71,160,1) 100%)')};
+  // background: ${({isQuestionMark}) => (isQuestionMark ? 'gold' : 'radial-gradient(circle, rgba(73,120,244,1) 0%, rgba(242,71,160,1) 100%)')};
+  background: silver;
 `
 
 const ScratchedBox = ({color}) => (

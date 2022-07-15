@@ -25,11 +25,6 @@ export const generateBoard = () => {
     board.push(...possibleMoves.splice((Math.floor(Math.random() * possibleMoves.length)), 1))
   }
   const winners = getWinners(board);
-  if (winners.length === 1) {
-    console.log(board, winners[0])
-    return {board, winner: winners[0]};
-  } else {
-    // console.log('Not valid board')
-    return generateBoard();
-  }
+  if (winners.length === 1) return ({board, winner: winners[0]});
+  return generateBoard();
 }
