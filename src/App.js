@@ -1,10 +1,10 @@
-import React, {useCallback, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import styled from 'styled-components';
 import ScratchedBox from './ScratchedBox';
 import {generateBoard} from './board';
 import {faBabyCarriage} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {SCRATCH_SIZE, WINNER_COLOR, LOOSER_COLOR} from './constants';
+import {WINNER_COLOR, LOOSER_COLOR} from './constants';
 
 const Container = styled.div`
   background-repeat: repeat;
@@ -54,34 +54,14 @@ const Subtitle = styled(Title)`
 
 const App = () => {
   const {board, winner} = useMemo(() => generateBoard(), []);
-
-  const onScratch = useCallback(({touches, clientX, clientY}) => {
-    const x = touches ? touches[0].clientX : clientX;
-    const y = touches ? touches[0].clientY : clientY;
-    const elements = [];
-    elements.push(document.elementFromPoint(x - SCRATCH_SIZE, y));
-    elements.push(document.elementFromPoint(x, y - SCRATCH_SIZE));
-    elements.push(document.elementFromPoint(x, y));
-    elements.push(document.elementFromPoint(x, y + SCRATCH_SIZE));
-    elements.push(document.elementFromPoint(x + SCRATCH_SIZE, y));
-    elements.forEach((element) => {
-      if (element && (element.getAttribute('name') === 'dot')) {
-        element.style.background = 'transparent'
-      }
-    })
-  }, [])
-
   return (
     <Container>
       <CardWrapper>
         <Title><span style={{color: '#4978F4'}}>Boy</span> or <span style={{color: '#F247A0'}}>Girl</span>?</Title>
-        <Card
-            onMouseMove={onScratch}
-            onTouchMove={onScratch}
-        >
+        <Card>
           {[...Array(3).keys()].map((i) => <Row key={i}>
             {[...Array(3).keys()].map((j) => (
-                <ScratchedBox key={j} color={board[(i * 3) + j] === winner ? WINNER_COLOR : LOOSER_COLOR} winner={winner} />
+                <ScratchedBox key={j} id={`${i}-${j}`} color={board[(i * 3) + j] === winner ? WINNER_COLOR : LOOSER_COLOR} winner={winner} />
             ))}
           </Row>)}
         </Card>

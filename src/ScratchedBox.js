@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBabyCarriage} from '@fortawesome/free-solid-svg-icons';
-import {BOX_SIZE, SCRATCH_SIZE, SCRATCH_COUNT, QUESTION_MARK_DOTS} from './constants';
+import {BOX_SIZE} from './constants';
 
 const Container = styled.div`
   position: relative;
@@ -15,34 +15,48 @@ const Container = styled.div`
   margin: 4px;
 `
 
-const HiddenDot = styled.div`
+const Canvas = styled.canvas`
   position: absolute;
-  width: ${SCRATCH_SIZE}px;
-  height: ${SCRATCH_SIZE}px;
-  top: ${({top}) => top}px;
-  left: ${({left}) => left}px;
-  // background: ${({isQuestionMark}) => (isQuestionMark ? 'gold' : 'radial-gradient(circle, rgba(73,120,244,1) 0%, rgba(242,71,160,1) 100%)')};
-  background: silver;
+  background-color: silver;
+  z-index: 1;
 `
 
-const ScratchedBox = ({color}) => (
+const ScratchedBox = ({id, color}) => {
+  useEffect(() => {
+    const canvas = document.querySelector(`#scratch-box-${id}`);
+    canvas.style.backgroundColor = 'transparent';
+    const context = canvas.getContext('2d');
+    context.fillStyle = 'silver'
+    context.fillRect(0, 0, canvas.width, canvas.height)
+
+    const onScratch = ({targetTouches, target, offsetX, offsetY}) => {
+      const rect = target.getBoundingClientRect();
+      const x = targetTouches ? targetTouches[0].pageX - rect.left : offsetX;
+      const y = targetTouches ? targetTouches[0].pageY - rect.top : offsetY;
+
+      context.globalCompositeOperation = 'destination-out';
+      const circle = new Path2D();
+      circle.arc(x, y, 20, 0, 2 * Math.PI);
+      context.fill(circle);
+    }
+
+    canvas.addEventListener('mousemove', onScratch);
+    canvas.addEventListener('touchmove', onScratch);
+    return () => {
+      canvas.removeEventListener('mousemove', onScratch);
+      canvas.removeEventListener('touchmove', onScratch);
+    }
+  }, [id]);
+
+  return (
     <Container>
       <FontAwesomeIcon
           icon={faBabyCarriage}
           color={color}
           fontSize={50}
       />
-      {[...Array(SCRATCH_COUNT).keys()].map((i) =>
-          [...Array(SCRATCH_COUNT).keys()].map((j) => (
-              <HiddenDot
-                  name="dot"
-                  key={`${i}-${j}`}
-                  isQuestionMark={QUESTION_MARK_DOTS.includes((i * SCRATCH_COUNT) + j)}
-                  top={(i * SCRATCH_SIZE)}
-                  left={j * SCRATCH_SIZE}
-              />
-          )))}
+      <Canvas id={`scratch-box-${id}`} width={BOX_SIZE} height={BOX_SIZE} />
     </Container>
-)
+)}
 
 export default ScratchedBox;
