@@ -25,19 +25,32 @@ const ScratchedBox = ({id, color}) => {
   useEffect(() => {
     const canvas = document.querySelector(`#scratch-box-${id}`);
     canvas.style.backgroundColor = 'transparent';
-    const context = canvas.getContext('2d');
+    let context = canvas.getContext('2d');
     context.fillStyle = 'silver'
     context.fillRect(0, 0, canvas.width, canvas.height)
 
-    const onScratch = ({targetTouches, target, offsetX, offsetY}) => {
-      const rect = target.getBoundingClientRect();
-      const x = targetTouches ? targetTouches[0].pageX - rect.left : offsetX;
-      const y = targetTouches ? targetTouches[0].pageY - rect.top : offsetY;
+    const onScratch = ({targetTouches, offsetX, offsetY}) => {
+      let x, y;
+      if (targetTouches) {
+        const {clientX, clientY} = targetTouches[0];
+        const elementFromPoint = document.elementFromPoint(clientX, clientY);
+        if (elementFromPoint?.tagName === 'CANVAS') {
+          const rect = elementFromPoint.getBoundingClientRect();
+          x = targetTouches[0].pageX - rect.left - window.scrollX;
+          y = targetTouches[0].pageY - rect.top - window.scrollY;
+          context = elementFromPoint.getContext('2d');
+        }
+      } else {
+        x = offsetX;
+        y = offsetY;
+      }
 
-      context.globalCompositeOperation = 'destination-out';
-      const circle = new Path2D();
-      circle.arc(x, y, 20, 0, 2 * Math.PI);
-      context.fill(circle);
+      if (x && y) {
+        context.globalCompositeOperation = 'destination-out';
+        const circle = new Path2D();
+        circle.arc(x, y, 20, 0, 2 * Math.PI);
+        context.fill(circle);
+      }
     }
 
     canvas.addEventListener('mousemove', onScratch);
