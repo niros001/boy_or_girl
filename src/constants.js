@@ -1,8 +1,6 @@
 export const BOX_SIZE = 90;
-export const SCRATCH_SIZE = 6;
-export const SCRATCH_COUNT = BOX_SIZE / SCRATCH_SIZE;
-// Work for that consts only (SCRATCH_COUNT = 15)
-export const QUESTION_MARK_DOTS = [21, 22, 23 ,35, 39, 49, 55, 70, 85, 99, 113, 127, 142, 157, 187];
+export const BOX_MARGIN = 4;
+export const CARD_SIZE = (BOX_SIZE * 3) + ((BOX_MARGIN * 2) * 4); // Do not change it!
 const colors = ['#F247A0', '#4978F4']
 export const WINNER_COLOR = colors.splice((Math.floor(Math.random() * colors.length)), 1);
 export const LOOSER_COLOR = colors.splice((Math.floor(Math.random() * colors.length)), 1);
