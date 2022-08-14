@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/boy_or_girl/static/css/main.74cd1b6a.css",
-    "main.js": "/boy_or_girl/static/js/main.f16f0099.js",
+    "main.js": "/boy_or_girl/static/js/main.ba15e601.js",
     "static/js/787.884b5ea4.chunk.js": "/boy_or_girl/static/js/787.884b5ea4.chunk.js",
     "static/media/bg.jpeg": "/boy_or_girl/static/media/bg.1180b9011f5fc59e551f.jpeg",
     "index.html": "/boy_or_girl/index.html",
     "main.74cd1b6a.css.map": "/boy_or_girl/static/css/main.74cd1b6a.css.map",
-    "main.f16f0099.js.map": "/boy_or_girl/static/js/main.f16f0099.js.map",
+    "main.ba15e601.js.map": "/boy_or_girl/static/js/main.ba15e601.js.map",
     "787.884b5ea4.chunk.js.map": "/boy_or_girl/static/js/787.884b5ea4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.74cd1b6a.css",
-    "static/js/main.f16f0099.js"
+    "static/js/main.ba15e601.js"
   ]
 }
